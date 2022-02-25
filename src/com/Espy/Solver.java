@@ -7,11 +7,11 @@ public class Solver
 {
     public static List<String> staticListWords = new ArrayList<>();
     // private static final String addressForWords = "https://gist.githubusercontent.com/h3xx/1976236/raw/bbabb412261386673eff521dddbe1dc815373b1d/wiki-100k.txt";
-    private static final String listOfAllPossibleWordsFileName = "ListOfAllPossibleWords.txt";
+    public static final String listOfAllPossibleWordsFileName = "ListOfAllPossibleWords.txt";
     public List<String> validLetters = new ArrayList<>();
     public List<String> words;
     public String mandatoryLetters = "";
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, InterruptedException
     {
         Initialize();
         var solver = new Solver();
@@ -22,8 +22,11 @@ public class Solver
             solver.TakeAGuess(guess);
             Printer.PrintTopMostPopularWords(solver.words);
             var emulator = new Emulator(solver);
+            var time1 = System.currentTimeMillis();
             var nextBestGuess = emulator.DetermineNextBestGuess();
             Printer.PrintNextGuess(nextBestGuess);
+            var time2 = System.currentTimeMillis();
+            System.out.printf("This iteration took %s ms.%n", time2-time1);
         }
     }
 

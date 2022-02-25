@@ -1,10 +1,24 @@
 package com.Espy;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Statistics
 {
     public static final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    public static void main(String[] args) throws IOException
+    {
+        var words = WordGetter.GetWordsFromFile(Solver.listOfAllPossibleWordsFileName);
+        var listOfWordsEndingInS = new ArrayList<String>();
+        for (var word : words)
+        {
+            if (word.endsWith("s") && !word.endsWith("ss"))
+            {
+                listOfWordsEndingInS.add(word);
+            }
+        }
+        Printer.PrintAllWords(listOfWordsEndingInS);
+    }
     public static void PrintWordStatistics(List<String> words)
     {
         Printer.PrintTopMostPopularWords(words);
